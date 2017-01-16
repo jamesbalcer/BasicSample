@@ -2,6 +2,7 @@
 
 #import "ViewController.h"
 
+
 @interface ViewController () <GMBLPlaceManagerDelegate, GMBLCommunicationManagerDelegate, GMBLExperienceManagerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) GMBLPlaceManager *placeManager;
@@ -145,6 +146,35 @@ prepareNotificationForDisplay:(UILocalNotification *)notification forCommunicati
     
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]]
                           withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+#pragma mark - Prepare for Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+
+    // here you'll need to check if the segue identifier is equal to the segue that take you to your Details View Controller. I believe it's this "listView"
+
+    if ([segue.identifier isEqualToString:@"listView"]) {
+
+        // get a reference to your Details View Controller
+
+        ListViewController *destinationVC  = (ListViewController *)segue.destinationViewController
+
+        // you need to obtain the item selected from the tableView
+
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow]
+
+        // you have the events array, get item selected. What's types of obects are in the Events array?
+
+        // you're gonna do something like
+        // Event *event = events[indexPath.row]      => now you have the event that you're gonna pass to the Details VC
+        // next, you set the property you declared in your ListViewController to this event
+
+        //something like:
+       // destinationVC.someProperty = event
+
+
+    }
 }
 
 @end
